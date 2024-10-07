@@ -22,16 +22,21 @@ const otpScreen = () => {
         newOtp[index] = sanitizedText;
 
         setOtp(newOtp);
-    
+
         if (sanitizedText.length === 1 && index < otpLength - 1) {
-          inputs.current[index + 1].focus();
+            inputs.current[index + 1].focus();
+        } else if (sanitizedText.length === 0 && index > 0) {
+            const prevIndex = index - 1;
+            if (inputs.current[prevIndex]) {
+                inputs.current[prevIndex].focus();
+            }
         }
-      };
+    };
 
     return (
         <SafeAreaView className="h-full flex-1 bg-white">
             <StatusBar backgroundColor="#ffffff" style="dark" />
-            
+
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 
                 <View className="flex-row items-center p-4 mt-2">
@@ -52,7 +57,7 @@ const otpScreen = () => {
                                     <TextInput
                                         key={index}
                                         ref={(input) => inputs.current[index] = input}
-                                        className="w-12 h-12 text-center text-xl bg-[#F4F5F9] border border-gray-300 rounded-md font-InterSemiBold"
+                                        className="w-12 h-12 text-center text-lg bg-[#F4F5F9] border border-gray-300 rounded-md font-InterSemiBold"
                                         keyboardType="numeric"
                                         maxLength={1}
                                         onChangeText={(text) => handleChange(text, index)}

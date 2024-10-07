@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, ScrollView, Switch, Keyboard } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView, Keyboard } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar'
 import { LinearGradient } from 'expo-linear-gradient'
 import { router, useLocalSearchParams } from 'expo-router'
-import { Entypo } from '@expo/vector-icons'
+import { Entypo, AntDesign } from '@expo/vector-icons'
 
 import { color } from '../../config/colors'
 import CustomInput from '../../components/CustomInput'
@@ -15,9 +15,6 @@ const signup = () => {
   const { route } = useLocalSearchParams();
 
   const [main, setMain] = useState(true);
-  const [isEnabled, setIsEnabled] = useState(false);
-
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   return (
     <SafeAreaView className="h-full flex-1">
@@ -41,7 +38,7 @@ const signup = () => {
 
           <View className="flex-1 bg-white mt-2 rounded-t-[30px] px-7 pt-7 shadow-2xl">
 
-          {route === 'OTP' ? (
+            {route === 'OTP' ? (
               <View className="flex-1 justify-between">
                 <View>
                   <View className="mb-8 w-[80%]">
@@ -54,9 +51,24 @@ const signup = () => {
                       <CustomInput placeholder="Enter a username" onSubmitEditing={Keyboard.dismiss} />
                     </View>
 
-                    <View className="mb-5">
+                    <View className="mb-6">
                       <Text className="text-sm mb-2 font-InterMedium">Password*</Text>
                       <CustomInputIcon placeholder="Enter a password" isPassword onSubmitEditing={Keyboard.dismiss} />
+                    </View>
+
+                    <View className="mb-5 pl-1 pr-4">
+                      <View className="flex-row items-start mb-2">
+                        <AntDesign name="checkcircle" size={12} color="gray" style={{ marginRight: 8, top: 4 }} />
+                        <Text className="text-sm font-InterSemiBold text-gray-700">Length: <Text className="font-InterRegular text-gray-500">Ensure your password is at least 8 characters long</Text></Text>
+                      </View>
+                      <View className="flex-row items-start mb-2">
+                        <AntDesign name="checkcircle" size={12} color="gray" style={{ marginRight: 8, top: 4 }} />
+                        <Text className="text-sm font-InterSemiBold text-gray-700">Numbers: <Text className="font-InterRegular text-gray-500"> Include at least one number (0-9)</Text></Text>
+                      </View>
+                      <View className="flex-row items-start mb-2">
+                        <AntDesign name="checkcircle" size={12} color="gray" style={{ marginRight: 8, top: 4 }} />
+                        <Text className="text-sm font-InterSemiBold text-gray-700">Case Sensitivity: <Text className="font-InterRegular text-gray-500">Use both uppercase and lowercase letters</Text></Text>
+                      </View>
                     </View>
 
                     <View className="mb-9">
@@ -71,7 +83,7 @@ const signup = () => {
                     text='Sign up'
                     width='w-[100%]'
                     styles='mb-4 py-4'
-                    onPress={() => router.push('/login')}
+                    onPress={() => router.push('/choose-security')}
                   />
 
                   <View className="flex-row justify-center">
@@ -100,23 +112,10 @@ const signup = () => {
                       <CustomInput placeholder="Enter your mobile number" onSubmitEditing={Keyboard.dismiss} keyboardType='numeric' />
                     </View>
 
-                    <View className="mb-6">
+                    <View className="mb-9">
                       <Text className="text-sm mb-2 font-InterMedium">Account Number*</Text>
                       <CustomInput placeholder="Enter 14 digits Acc No." onSubmitEditing={Keyboard.dismiss} />
                     </View>
-                  </View>
-
-                  <View className="mb-7 d-flex flex-row items-center px-1">
-                    <Text className="text-sm font-InterMedium -top-1">
-                      Set Fingerprint{" "}
-                    </Text>
-                    <Switch
-                      className="ml-auto"
-                      trackColor={{ false: "#c9c9c9", true: "#1DBBD8" }}
-                      thumbColor={isEnabled ? "#1DBBD8" : "#f4f3f4"}
-                      onValueChange={toggleSwitch}
-                      value={isEnabled}
-                    />
                   </View>
                 </View>
 

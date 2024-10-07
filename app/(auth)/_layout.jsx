@@ -10,6 +10,9 @@ const AuthLayout = () => {
           <Stack.Screen name="forgot-password" options={{ headerShown: false }} />
           <Stack.Screen name="otp-screen" options={{ headerShown: false }} />
           <Stack.Screen name="new-password" options={{ headerShown: false }} />
+          <Stack.Screen name="choose-security" options={{ headerShown: false }} />
+          <Stack.Screen name="register-fingerprint" options={{ headerShown: false }} />
+          <Stack.Screen name="register-faceid" options={{ headerShown: false }} />
       </Stack>
   );
 };
